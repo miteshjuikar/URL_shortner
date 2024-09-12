@@ -1,5 +1,5 @@
 const express = require("express");
-const { handleGenerateNewUrl, handleRedirectToMainURL } = require("../controllers/ulrController")
+const { handleGenerateNewUrl, handleRedirectToMainURL, handleGetAnalysisDetails } = require("../controllers/ulrController")
 
 const router = express.Router();
 
@@ -9,6 +9,8 @@ router.route("/")
 router.route("/:id")
 .get(handleRedirectToMainURL);
 
+router.route("/analysis/:id")
+.get(handleGetAnalysisDetails);
 
 
 module.exports = router;

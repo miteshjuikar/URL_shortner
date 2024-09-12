@@ -18,6 +18,7 @@ async function handleGenerateNewUrl(req,res){
 
 async function handleRedirectToMainURL(req, res){
     const shortId = req.params.id;
+    
     const entry = await URL.findOneAndUpdate(
         {shortId}, {
             $push: { 
@@ -25,7 +26,17 @@ async function handleRedirectToMainURL(req, res){
             }
         }
     );    
+    console.log(entry.redirectURL);
     res.redirect(entry.redirectURL);
 }
 
-module.exports = { handleGenerateNewUrl, handleRedirectToMainURL };
+async function handleGetAnalysisDetails(req, res){
+    const shortId = req.params.id;
+    const result = await URL.findOne({shortId})
+    return res.json({
+        totalClick: result.visitHistory.length,
+        analysis: result.visitHistory
+    })
+}
+
+module.exports = { handleGenerateNewUrl, handleRedirectToMainURL, handleGetAnalysisDetails };
