@@ -1,8 +1,14 @@
 const express = require("express");
-const { handleGenerateNewUrl } = require("../controllers/ulrController")
+const { handleGenerateNewUrl, handleRedirectToMainURL } = require("../controllers/ulrController")
 
 const router = express.Router();
 
-router.post("/", handleGenerateNewUrl);
+router.route("/")
+.post(handleGenerateNewUrl);
+
+router.route("/:id")
+.get(handleRedirectToMainURL);
+
+
 
 module.exports = router;
