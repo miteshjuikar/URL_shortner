@@ -7,7 +7,8 @@ const app = express();
 const PORT = 8002;
 
 //Generate Router
-const urlRoute = require("./routes/urlRoute")
+const urlRouter = require("./routes/urlRoute")
+const userRouter = require("./routes/userRouter");
 
 //Connection to mongoDB
 const { connectToMongoDB } = require("./connection");
@@ -25,6 +26,7 @@ app.set("views", path.resolve("./viewsFolder"));
 
 
 app.use("/", staticRouter);
-app.use("/url", urlRoute);
+app.use("/url", urlRouter);
+app.use("/user", userRouter);
 
 app.listen(PORT, () => console.log(`Server is started at ${PORT}`));
